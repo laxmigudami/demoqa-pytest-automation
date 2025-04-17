@@ -11,7 +11,7 @@ class TestDynamicProperties(BaseTest):
     """Dynamic Properties Test Class"""
 
     @pytest.mark.tc003
-    def test_tc003_dynamic_properties_check_button_color_change(self, driver):
+    def test_tc003_validate_dynamic_properties_button_color_change(self, driver):
         logger.info("----Start [TC_003] Verify Button Color Change ----")
         self.init_pages(driver)
 

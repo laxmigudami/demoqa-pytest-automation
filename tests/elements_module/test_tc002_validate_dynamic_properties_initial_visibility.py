@@ -9,8 +9,8 @@ class TestDynamicProperties(BaseTest):
     """Dynamic Properties Test Class"""
 
     @pytest.mark.tc002
-    def test_tc002_dynamic_properties_initial_visibility(self, driver):
-        logger.info("----Start [TC_002] Verify Dynamic Properties Header & Button Visibility ----")
+    def test_tc002_validate_dynamic_properties_initial_visibility(self, driver):
+        logger.info("----Start [TC_002] Verify Dynamic Properties initial visibility ----")
         self.init_pages(driver)
 
         logger.info("[Step 1]: Navigate to Elements > Dynamic Properties section")

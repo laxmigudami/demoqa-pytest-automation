@@ -5,11 +5,12 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.usefixtures("driver")
 class TestCheckbox(BaseTest):
+    """Checkbox Test Class"""
 
     @pytest.mark.tc001
-    def test_tc1_checkbox_expand_and_select(self, driver):
+    def test_tc001_verify_all_checkbox_options(self, driver):
 
-        logger.info("----Start [TC_001] Checkbox Expand and Select Test ----")
+        logger.info("----Start [TC_001] Verify all Check Box Options ----")
         logger.info("[Step 1]: Navigate to Check Box from Home Page")
         self.init_pages(driver)
         self.home_page.remove_ads()

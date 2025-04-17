@@ -4,12 +4,15 @@ from lib.base_test import BaseTest
 
 logger = logging.getLogger(__name__)
 
+
 @pytest.mark.usefixtures("driver")
 class TestPracticeForm(BaseTest):
-    """Form Submission Tests"""
+    """Practice Form Submission Tests"""
 
     @pytest.mark.tc005
-    def test_tc005_validate_submission_of_practice_form_with_data(self, driver, load_user_data):
+    def test_tc005_validate_submission_of_practice_form_with_data(
+        self, driver, load_user_data
+    ):
         logger.info("----Start [TC_005] Validate form submission with valid data ----")
         self.init_pages(driver)
 

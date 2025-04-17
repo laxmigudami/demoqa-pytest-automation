@@ -92,15 +92,20 @@ demoqa-pytest-automation/
 │   ├── report.html           # Pytest HTML report
 │   └── screenshots/          # Failure screenshots
 ├── tests/                   
-│   ├── test_tc001.py         # Test case 1
-│   ├── test_tc002.py         # Test case 2
-│   └── ...                   # More test cases
+│   ├── elements_module/      # Test cases for Elements module
+│   │   ├── test_tc001.py     # Test case for checkbox
+│   │   ├── test_tc002.py     # Test case for dynamic properties
+│   │   └── test_tc003.py     # Another test case for elements
+│   ├── forms_module/         # Test cases for Forms module
+│   │   ├── test_tc004.py     # Test case for forms
+│   │   └── test_tc005.py     # Another test case for forms
+│   ├── bookstore_module/     # Test cases for Bookstore module
+│   │   └── test_tc006.py     # Test case for bookstore
 ├── .gitignore                # Files to be ignored by Git
 ├── conftest.py               # Global fixtures and hooks
 ├── pytest.ini                # Pytest configuration (report, logs, markers)
 ├── requirements.txt          # Project dependencies
 └── README.md                 # Project documentation
-
 ```
 
 ## Configuration
