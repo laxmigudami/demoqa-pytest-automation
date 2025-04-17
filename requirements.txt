@@ -1,5 +1,6 @@
-selenium
-pytest
-pytest-html
-pyyaml
-requests
+selenium==4.19.0
+pytest==8.1.1
+pytest-html==4.1.1
+pyyaml==6.0.1
+pytest-metadata==3.1.1
+requests==2.31.0
