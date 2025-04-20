@@ -1,6 +1,7 @@
 import os
-import yaml
+
 import requests
+import yaml
 
 
 def get_books_from_api():
@@ -8,7 +9,7 @@ def get_books_from_api():
     config_path = os.path.join("config", "config.yaml")
 
     # Load the configuration from the YAML file
-    with open(config_path, "r") as file:
+    with open(config_path) as file:
         config = yaml.safe_load(file)
 
     api_url = config["base_url"] + "/BookStore/v1/Books"  # Using base_url from the config

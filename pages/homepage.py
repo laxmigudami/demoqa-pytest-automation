@@ -1,12 +1,13 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 class HomePage:
     """Home page object"""
 
     ELEMENTS_CARD = (By.XPATH, '(//div[@class="card mt-4 top-card"])[1]')
-    F0RMS_CARD = (By.XPATH, '(//div[@class="card mt-4 top-card"])[2]')
+    FORMS_CARD = (By.XPATH, '(//div[@class="card mt-4 top-card"])[2]')
     BOOK_STORE_APPLICATION_CARD = (By.XPATH, '(//div[@class="card mt-4 top-card"])[6]')
     VIEW = (By.XPATH, "//div[@class='body-height']")
 
@@ -34,7 +35,7 @@ class HomePage:
 
     def move_to_forms_page(self):
         """Navigate to the 'Forms' card on the home page."""
-        element = self.wait.until(EC.element_to_be_clickable(self.F0RMS_CARD))
+        element = self.wait.until(EC.element_to_be_clickable(self.FORMS_CARD))
         self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
         self.driver.execute_script("arguments[0].click();", element)
 

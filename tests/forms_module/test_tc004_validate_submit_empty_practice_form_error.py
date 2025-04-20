@@ -1,8 +1,11 @@
 import logging
+
 import pytest
+
 from lib.base_test import BaseTest
 
 logger = logging.getLogger(__name__)
+
 
 @pytest.mark.usefixtures("driver")
 class TestPracticeForm(BaseTest):
@@ -26,7 +29,9 @@ class TestPracticeForm(BaseTest):
         assert self.practiceform_page.is_validation_error_displayed("firstName"), "First Name field validation failed"
         assert self.practiceform_page.is_validation_error_displayed("lastName"), "Last Name field validation failed"
         assert self.practiceform_page.is_validation_error_displayed("userEmail"), "Email field validation failed"
-        assert self.practiceform_page.is_validation_error_displayed("userNumber"), "Mobile Number field validation failed"
+        assert self.practiceform_page.is_validation_error_displayed("userNumber"), (
+            "Mobile Number field validation failed"
+        )
 
         logger.info("[Expected Result] All required fields should show validation errors")
         logger.info("----End [TC_004]----")

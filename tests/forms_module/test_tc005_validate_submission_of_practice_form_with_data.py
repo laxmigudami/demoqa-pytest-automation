@@ -1,5 +1,7 @@
 import logging
+
 import pytest
+
 from lib.base_test import BaseTest
 
 logger = logging.getLogger(__name__)
@@ -10,9 +12,7 @@ class TestPracticeForm(BaseTest):
     """Practice Form Submission Tests"""
 
     @pytest.mark.tc005
-    def test_tc005_validate_submission_of_practice_form_with_data(
-        self, driver, load_user_data
-    ):
+    def test_tc005_validate_submission_of_practice_form_with_data(self, driver, load_user_data):
         logger.info("----Start [TC_005] Validate form submission with valid data ----")
         self.init_pages(driver)
 
@@ -28,7 +28,7 @@ class TestPracticeForm(BaseTest):
             last_name=load_user_data["last_name"],
             email=load_user_data["email"],
             gender=load_user_data["gender"],
-            mobile_number=load_user_data["mobile"]
+            mobile_number=load_user_data["mobile"],
         )
 
         logger.info("[Step 3]: Submit the form")

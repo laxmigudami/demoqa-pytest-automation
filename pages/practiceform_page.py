@@ -1,12 +1,17 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from pages.homepage import HomePage
 from selenium.webdriver.support.ui import WebDriverWait
+
+from pages.homepage import HomePage
+
 
 class PracticeFormPage(HomePage):
     """Practice Form page object"""
 
-    PRACTICE_FORM_BUTTON = (By.XPATH, "//div[@class='element-list collapse show']//li[@id='item-0']")
+    PRACTICE_FORM_BUTTON = (
+        By.XPATH,
+        "//div[@class='element-list collapse show']//li[@id='item-0']",
+    )
     PRACTICE_FORM_TEXT = (By.CSS_SELECTOR, ".text-center")
     FIRST_NAME_INPUT = (By.CSS_SELECTOR, "#firstName")
     LAST_NAME_INPUT = (By.CSS_SELECTOR, "#lastName")

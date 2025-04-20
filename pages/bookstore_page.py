@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+
 from pages.homepage import HomePage
+
 
 class BookStorePage(HomePage):
     """Book Store page object"""

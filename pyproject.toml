@@ -1,0 +1,19 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+exclude = ["build", "dist", ".venv", "__pycache__", "reports"]
+
+# Enable recommended rules + formatter
+lint.select = ["E", "F", "I", "B", "UP", "W"]
+lint.ignore = [
+    "C901",     # too-complex (if you have complex methods for Selenium)
+    "PLR0913",  # too-many-arguments (common in test data)
+    "D",        # docstring-related rules (skip for simplicity)
+]
+
+# Fixable and unfixable
+fix = true  # allow autofixes (optional)
+
+[tool.ruff.format]
+quote-style = "preserve"  # or "double" or "single"
+indent-style = "space"

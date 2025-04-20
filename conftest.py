@@ -1,16 +1,18 @@
 import json
 import os
+from datetime import datetime
 
 import pytest
-from selenium import webdriver
 import yaml
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from datetime import datetime
+
 
 @pytest.fixture(scope="session")
 def config():
     with open("config/config.yaml") as file:
         return yaml.safe_load(file)
+
 
 @pytest.fixture(scope="class")
 def driver(config):
@@ -22,6 +24,7 @@ def driver(config):
     driver.get(config["base_url"])
     yield driver
     driver.quit()
+
 
 @pytest.fixture(autouse=True)
 def screenshot_on_failure(request, driver):
@@ -36,11 +39,13 @@ def screenshot_on_failure(request, driver):
         driver.save_screenshot(filepath)
         print(f"\n[SCREENSHOT SAVED] {filepath}")
 
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
     setattr(item, f"rep_{rep.when}", rep)
+
 
 @pytest.fixture
 def load_user_data():

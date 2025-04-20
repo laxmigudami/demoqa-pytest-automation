@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 from pages.homepage import HomePage
+
 
 class CheckboxPage(HomePage):
     """Check Box page object"""
@@ -10,8 +12,14 @@ class CheckboxPage(HomePage):
     check_box_center = (By.CSS_SELECTOR, '.text-center')
     expand_toggle = (By.CSS_SELECTOR, ".rct-icon.rct-icon-expand-close")
     collapsed_list = (By.XPATH, '//li[@class="rct-node rct-node-parent rct-node-collapsed"]')
-    desktop_toggle = (By.XPATH, '(//button[@type="button" and @class="rct-collapse rct-collapse-btn"])[2]')
-    desktop_list = (By.XPATH, "//li[@class='rct-node rct-node-parent rct-node-expanded']//ol/li[@class='rct-node rct-node-leaf']")
+    desktop_toggle = (
+        By.XPATH,
+        '(//button[@type="button" and @class="rct-collapse rct-collapse-btn"])[2]',
+    )
+    desktop_list = (
+        By.XPATH,
+        "//li[@class='rct-node rct-node-parent rct-node-expanded']//ol/li[@class='rct-node rct-node-leaf']",
+    )
 
     def __init__(self, driver):
         super().__init__(driver)

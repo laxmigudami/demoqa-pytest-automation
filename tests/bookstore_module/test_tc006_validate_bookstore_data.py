@@ -1,9 +1,12 @@
 import logging
+
 import pytest
-from lib.base_test import BaseTest
+
 from lib.api_utils import get_books_from_api
+from lib.base_test import BaseTest
 
 logger = logging.getLogger(__name__)
+
 
 @pytest.mark.usefixtures("driver")
 class TestBookStore(BaseTest):

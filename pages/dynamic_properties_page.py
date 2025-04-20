@@ -1,14 +1,18 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class DynamicPropertiesPage:
     """Page Object for the Dynamic Properties section under Elements."""
 
     # Locators
-    DYNAMIC_PROPERTIES_BUTTON = (By.CSS_SELECTOR, "div[class='element-list collapse show'] li[id='item-8']")
+    DYNAMIC_PROPERTIES_BUTTON = (
+        By.CSS_SELECTOR,
+        "div[class='element-list collapse show'] li[id='item-8']",
+    )
     DYNAMIC_PROPERTIES_HEADER = (By.CSS_SELECTOR, "h1.text-center")
     VISIBLE_AFTER_BUTTON = (By.ID, "visibleAfter")
     ENABLE_AFTER_BUTTON = (By.ID, "enableAfter")
@@ -42,7 +46,7 @@ class DynamicPropertiesPage:
         """Check if the 'Will enable 5 seconds' button is displayed before it's enabled."""
         try:
             return self.driver.find_element(*self.ENABLE_AFTER_BUTTON).is_displayed()
-        except:
+        except Exception:
             return False
 
     def is_enable_after_button_enabled(self):
