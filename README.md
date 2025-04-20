@@ -1,3 +1,4 @@
+
 ## Welcome!!!
 # DemoQA Pytest Automation Framework
 
@@ -17,14 +18,20 @@ The framework includes configurations for global settings, a dependency manageme
 - Test data handling through JSON configuration files
 - HTML reports with `pytest-html` plugin
 - Logs and screenshots for failed tests
-- Configuration files for global settings (`pytest.ini`, `requirements.txt`)
+- Configuration files for global settings (`pytest.ini`, `pyproject.toml`, `requirements.txt`)
+- Static code analysis and formatting using `ruff`
+- Dependency management with `pip-tools`
 
 ## Pre-requisites
 
-Ensure that you have the following installed:
-- Python 3.x
-- `pip` for managing dependencies
+Ensure that you have the following installed globally on your system:
+
+- Python 3.x (recommended: Python 3.11+)
+- `pip` (Python package manager)
 - Git (for version control)
+
+> 💡 All Python packages including **Selenium** will be automatically installed via `make requirements`.
+
   
 ## Installation
 
@@ -56,72 +63,87 @@ Follow these steps to install and set up the project:
    .\.venv\Scripts\activate
    ```
 
-4. **Install the dependencies:**
+4. **Install dependencies:**
    ```bash
-   pip install -r requirements.txt
+   make requirements
    ```
+
+   > This will compile `requirements.txt` from `requirements.in` using `pip-compile` and install them.
+
 ## Running Tests
 
-To run the tests, use the following command:
+To run the tests:
 
 ```bash
 pytest
 ```
 
-By default, tests will be executed with the following configurations:
-- **HTML report generation**: The result will be saved in `reports/report.html`.
-- **Screenshots**: Screenshots will be saved in `reports/screenshots/` in case of a test failure.
+Test configuration includes:
+- **HTML Report**: Output in `reports/report.html`
+- **Screenshots**: Stored in `reports/screenshots/` for any test failures
 
 ### Additional Pytest Options
-- `--maxfail=1`: Fail the test run after the first failure.
-- `--disable-warnings`: Disable warnings for a cleaner output.
+- `--maxfail=1`: Stop after first failure
+- `--disable-warnings`: Suppress warnings
+
+## Static Code Analysis
+
+To run formatting and linting using [Ruff](https://docs.astral.sh/ruff/):
+
+```bash
+make sca
+```
+
+This will:
+- Format code using `ruff format`
+- Check for lint errors using `ruff check`
 
 ## Directory Structure
 
 ```
 demoqa-pytest-automation/
 ├── config/                  
-│   ├── config.yaml           # Base URL and environment settings
-│   └── user_data.json        # Test data for form inputs
-├── lib/                     
-│   ├── base_test.py          # Base test setup/teardown
-│   └── utils.py              # Helper methods for tests
-├── pages/                    # Page Object Model classes
-│   └── *.py                  # Individual page modules
-├── reports/                 
-│   ├── report.html           # Pytest HTML report
-│   └── screenshots/          # Failure screenshots
-├── tests/                   
-│   ├── elements_module/      # Test cases for Elements module
-│   │   ├── test_tc001.py     # Test case for checkbox
-│   │   ├── test_tc002.py     # Test case for dynamic properties
-│   │   └── test_tc003.py     # Another test case for elements
-│   ├── forms_module/         # Test cases for Forms module
-│   │   ├── test_tc004.py     # Test case for forms
-│   │   └── test_tc005.py     # Another test case for forms
-│   ├── bookstore_module/     # Test cases for Bookstore module
-│   │   └── test_tc006.py     # Test case for bookstore
-├── .gitignore                # Files to be ignored by Git
-├── conftest.py               # Global fixtures and hooks
-├── pytest.ini                # Pytest configuration (report, logs, markers)
-├── requirements.txt          # Project dependencies
-└── README.md                 # Project documentation
+│   ├── config.yaml
+│   └── user_data.json
+├── lib/
+│   ├── base_test.py
+│   └── utils.py
+├── pages/
+│   └── *.py
+├── reports/
+│   ├── report.html
+│   └── screenshots/
+├── tests/
+│   ├── elements_module/
+│   ├── forms_module/
+│   └── bookstore_module/
+├── .gitignore
+├── conftest.py
+├── pytest.ini
+├── pyproject.toml
+├── requirements.in
+├── requirements.txt
+├── Makefile
+└── README.md
 ```
 
 ## Configuration
 
 ### `pytest.ini`
-
-The `pytest.ini` file is used for global configuration of the Pytest framework, including logging and HTML report settings.
+Configures logging, HTML reports, and test markers.
 
 ### `conftest.py`
+Sets up fixtures:
+- WebDriver lifecycle
+- Screenshot on failure
+- Config and test data loading
 
-The `conftest.py` file is used to configure test fixtures such as:
-- WebDriver setup and teardown
-- Screenshot capture on test failure
-- Loading configuration and test data
+### `pyproject.toml`
+Configures `ruff` for code formatting and linting.
 
 ## Troubleshooting
 
-1. **Missing Dependencies**: Ensure that you have all dependencies installed by running `pip install -r requirements.txt`.
-2. **Test Failures**: Check the HTML report or logs for more details on why a test failed. Screenshots will be available in the `reports/screenshots/` folder for failed tests.
+- **Dependency Errors**: Run `make requirements` to ensure all dependencies are resolved.
+- **Linting Errors**: Run `make sca` and follow suggestions to fix errors.
+- **Test Failures**: Check HTML report and screenshots for failure context.
+```
