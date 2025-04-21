@@ -1,1 +1,4 @@
 base_url: "https://demoqa.com"
+browser: "firefox"  # Options: chrome, firefox, safari, ie
+headless: false
+implicit_wait: 10
