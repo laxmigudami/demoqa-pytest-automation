@@ -5,11 +5,15 @@ from datetime import datetime
 import pytest
 import yaml
 from selenium import webdriver
-from selenium.common.exceptions import SessionNotCreatedException
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.ie.options import Options as IEOptions
 from selenium.webdriver.safari.options import Options as SafariOptions
+
+
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default="chrome",
+                     help="browser to execute tests (chrome, firefox, safari, ie)")
 
 
 @pytest.fixture(scope="session")
@@ -44,33 +48,30 @@ def get_browser_options(browser_name, headless):
         raise ValueError(f"Unsupported browser: {browser_name}")
 
 
-@pytest.fixture(scope="class", params=["chrome"])  # Only using Chrome for now
+@pytest.fixture(scope="class")
 def driver(request, config):
-    browser = request.param
+    browser = request.config.getoption("--browser").lower()
     headless = config["headless"]
     implicit_wait = config["implicit_wait"]
 
     options = get_browser_options(browser, headless)
+    
+    if browser == "chrome":
+        driver = webdriver.Chrome(options=options)
+    elif browser == "firefox":
+        driver = webdriver.Firefox(options=options)
+    elif browser == "ie":
+        driver = webdriver.Ie(options=options)
+    elif browser == "safari":
+        driver = webdriver.Safari(options=options)
+    else:
+        raise ValueError(f"Unsupported browser: {browser}")
 
-    try:
-        if browser == "chrome":
-            driver = webdriver.Chrome(options=options)
-        elif browser == "firefox":
-            driver = webdriver.Firefox(options=options)
-        elif browser == "ie":
-            driver = webdriver.Ie(options=options)
-        elif browser == "safari":
-            driver = webdriver.Safari(options=options)
-
-        driver.maximize_window()
-        driver.implicitly_wait(implicit_wait)
-        driver.get(config["base_url"])
-        yield driver
-        driver.quit()
-    except SessionNotCreatedException as e:
-        if "Safari" in str(e):
-            pytest.skip("Safari WebDriver requires enabling 'Allow Remote Automation' in Safari's Develop menu")
-        raise e
+    driver.maximize_window()
+    driver.implicitly_wait(implicit_wait)
+    driver.get(config["base_url"])
+    yield driver
+    driver.quit()
 
 
 @pytest.fixture(autouse=True)

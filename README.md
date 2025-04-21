@@ -1,4 +1,3 @@
-
 ## Welcome!!!
 # DemoQA Pytest Automation Framework
 
@@ -75,16 +74,25 @@ Follow these steps to install and set up the project:
 To run the tests:
 
 ```bash
+# Run with default browser (Chrome)
 pytest
+
+# Run with specific browser
+pytest --browser=chrome    # Chrome
+pytest --browser=firefox   # Firefox
+pytest --browser=safari    # Safari
+pytest --browser=ie        # Internet Explorer
+
+# Additional options
+pytest -v                  # Verbose output
+pytest -s                  # Show print statements
+pytest --maxfail=1        # Stop after first failure
+pytest --disable-warnings # Suppress warnings
 ```
 
 Test configuration includes:
 - **HTML Report**: Output in `reports/report.html`
 - **Screenshots**: Stored in `reports/screenshots/` for any test failures
-
-### Additional Pytest Options
-- `--maxfail=1`: Stop after first failure
-- `--disable-warnings`: Suppress warnings
 
 ## Static Code Analysis
 
@@ -114,7 +122,7 @@ demoqa-pytest-automation/
 │   ├── report.html
 │   └── screenshots/
 ├── tests/
-│   ├── elements_module/
+│   ├── elements_module/test_tc001
 │   ├── forms_module/
 │   └── bookstore_module/
 ├── .gitignore
@@ -146,4 +154,3 @@ Configures `ruff` for code formatting and linting.
 - **Dependency Errors**: Run `make requirements` to ensure all dependencies are resolved.
 - **Linting Errors**: Run `make sca` and follow suggestions to fix errors.
 - **Test Failures**: Check HTML report and screenshots for failure context.
-```
